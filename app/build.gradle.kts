@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.examen01_carrera_guanoluisa"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.examen01_carrera_guanoluisa"
