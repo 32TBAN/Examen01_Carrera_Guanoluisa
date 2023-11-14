@@ -29,14 +29,16 @@ public class Suma extends AppCompatActivity {
         if(num1String.isEmpty() || num2String.isEmpty()){
             Toast.makeText(this,"ERROR no hay numeros",Toast.LENGTH_SHORT).show();
         }else{
-            String resultadoSuma = sumaStrings(num1String, num2String);
+            if(validarRango(num1String) && validarRango(num2String)){
+                String resultadoSuma = sumaStrings(num1String, num2String);
 
-            String linea = "";
-            for (int i = 0; i < num1String.length(); i++) {
-                linea += "_";
+                String linea = "";
+                for (int i = 0; i < num1String.length(); i++) {
+                    linea += "_";
+                }
+                resultado.setText(num1String + "\n+" +
+                        num2String + "\n"+linea+"  \n" + resultadoSuma);
             }
-            resultado.setText(num1String + "\n+" +
-                    num2String + "\n"+linea+"  \n" + resultadoSuma);
         }
 
     }
@@ -75,5 +77,32 @@ public class Suma extends AppCompatActivity {
         return numero;
     }
 
+    private boolean validarRango(String numero) {
+        if (numero.charAt(0) == '0' || numero.charAt(0) == '-') {
+            Toast.makeText(this,"Numero 0 o negativo",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (numero.length() < 200) {
+            return true;
+        } else if (numero.length() > 200) {
+            Toast.makeText(this,"Fuera de rango",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String maximo = "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+
+        for (int i = 0; i < numero.length(); i++) {
+            if (numero.charAt(i) < maximo.charAt(i)) {
+                return true;
+            } else if (numero.charAt(i) > maximo.charAt(i)) {
+                Toast.makeText(this,"Fuera de rango",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }
