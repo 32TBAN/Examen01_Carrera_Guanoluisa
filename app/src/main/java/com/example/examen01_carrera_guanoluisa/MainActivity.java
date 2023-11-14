@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,Suma.class);
         startActivity(intent);
     }
+
+    public void onClickResta(View view){
+        Intent intent = new Intent(this,Resta.class);
+        startActivity(intent);
+    }
 }
