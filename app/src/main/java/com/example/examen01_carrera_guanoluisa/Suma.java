@@ -17,9 +17,9 @@ public class Suma extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suma);
 
-        num1 = findViewById(R.id.num1GK);
-        num2 = findViewById(R.id.num2GK);
-        resultado = findViewById(R.id.ResultadoGK);
+        num1 = findViewById(R.id.num1GCKE);
+        num2 = findViewById(R.id.num2GCKE);
+        resultado = findViewById(R.id.ResultadoGCKE);
     }
 
     public void suma(View view) {

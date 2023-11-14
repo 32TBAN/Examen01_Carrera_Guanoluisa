@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Resta extends AppCompatActivity {
 
@@ -16,9 +17,9 @@ public class Resta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resta);
 
-        num1 = findViewById(R.id.num1CS);
-        num2 = findViewById(R.id.num2CS);
-        resultado = findViewById(R.id.ResultadoCS);
+        num1 = findViewById(R.id.num1CAAS);
+        num2 = findViewById(R.id.num2CAAS);
+        resultado = findViewById(R.id.ResultadoCAAS);
     }
 
     public void resta(View view) {
@@ -26,12 +27,19 @@ public class Resta extends AppCompatActivity {
         String num2String = num2.getText().toString();
         String resultadoResta = restaStrings(num1String, num2String);
 
-        String linea = "";
-        for (int i = 0; i <= (num1String.length()+2); i++) {
-            linea += "_";
+        if(num1String.isEmpty() || num2String.isEmpty()){
+            Toast.makeText(this,"ERROR no hay numeros",Toast.LENGTH_SHORT).show();
+        }else{
+            if(validarRango(num1String) && validarRango(num2String)){
+                String linea = "";
+                for (int i = 0; i <= (num1String.length()+2); i++) {
+                    linea += "_";
+                }
+                resultado.setText(num1String + "\n-" +
+                        num2String + "\n"+linea+"  \n" + resultadoResta);
+            }
         }
-        resultado.setText(num1String + "\n-" +
-                num2String + "\n"+linea+"  \n" + resultadoResta);
+
     }
 
     private String restaStrings(String num1, String num2) {
@@ -70,5 +78,33 @@ public class Resta extends AppCompatActivity {
             numero = "0" + numero;
         }
         return numero;
+    }
+
+    private boolean validarRango(String numero) {
+        if (numero.charAt(0) == '0' || numero.charAt(0) == '-') {
+            Toast.makeText(this,"Numero 0 o negativo",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (numero.length() < 200) {
+            return true;
+        } else if (numero.length() > 200) {
+            Toast.makeText(this,"Fuera de rango",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String maximo = "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+
+        for (int i = 0; i < numero.length(); i++) {
+            if (numero.charAt(i) < maximo.charAt(i)) {
+                return true;
+            } else if (numero.charAt(i) > maximo.charAt(i)) {
+                Toast.makeText(this,"Fuera de rango",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        return true;
     }
 }
