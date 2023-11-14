@@ -10,7 +10,7 @@
     tools:context=".Suma">
 
     <EditText
-        android:id="@+id/num1R"
+        android:id="@+id/num1GK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -19,7 +19,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/num2R"
+        android:id="@+id/num2GK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
@@ -28,12 +28,12 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/ResultadoR"
+        android:id="@+id/ResultadoGK"
         android:layout_width="match_parent"
         android:layout_height="99dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonGK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="suma"

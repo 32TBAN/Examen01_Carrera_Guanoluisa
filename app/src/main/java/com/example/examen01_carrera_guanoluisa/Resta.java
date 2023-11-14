@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.math.BigInteger;
-
 public class Resta extends AppCompatActivity {
 
     EditText num1, num2;
@@ -18,9 +16,9 @@ public class Resta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resta);
 
-        num1 = findViewById(R.id.num1R);
-        num2 = findViewById(R.id.num2R);
-        resultado = findViewById(R.id.ResultadoR);
+        num1 = findViewById(R.id.num1CS);
+        num2 = findViewById(R.id.num2CS);
+        resultado = findViewById(R.id.ResultadoCS);
     }
 
     public void resta(View view) {
@@ -28,8 +26,12 @@ public class Resta extends AppCompatActivity {
         String num2String = num2.getText().toString();
         String resultadoResta = restaStrings(num1String, num2String);
 
+        String linea = "";
+        for (int i = 0; i <= (num1String.length()+2); i++) {
+            linea += "_";
+        }
         resultado.setText(num1String + "\n-" +
-                num2String + "\n _____________________ \n" + resultadoResta);
+                num2String + "\n"+linea+"  \n" + resultadoResta);
     }
 
     private String restaStrings(String num1, String num2) {

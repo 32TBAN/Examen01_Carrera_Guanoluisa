@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.math.BigInteger;
+import android.widget.Toast;
 
 public class Suma extends AppCompatActivity {
 
@@ -18,23 +17,28 @@ public class Suma extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suma);
 
-        num1 = findViewById(R.id.num1R);
-        num2 = findViewById(R.id.num2R);
-        resultado = findViewById(R.id.ResultadoR);
+        num1 = findViewById(R.id.num1GK);
+        num2 = findViewById(R.id.num2GK);
+        resultado = findViewById(R.id.ResultadoGK);
     }
 
     public void suma(View view) {
         String num1String = num1.getText().toString();
         String num2String = num2.getText().toString();
 
-        String resultadoSuma = sumaStrings(num1String, num2String);
+        if(num1String.isEmpty() || num2String.isEmpty()){
+            Toast.makeText(this,"ERROR no hay numeros",Toast.LENGTH_SHORT).show();
+        }else{
+            String resultadoSuma = sumaStrings(num1String, num2String);
 
-        String linea = "";
-        for (int i = 0; i < num1String.length(); i++) {
-
+            String linea = "";
+            for (int i = 0; i < num1String.length(); i++) {
+                linea += "_";
+            }
+            resultado.setText(num1String + "\n+" +
+                    num2String + "\n"+linea+"  \n" + resultadoSuma);
         }
-        resultado.setText(num1String + "\n+" +
-                num2String + "\n _____________________ \n" + resultadoSuma);
+
     }
 
     private String sumaStrings(String num1, String num2) {
