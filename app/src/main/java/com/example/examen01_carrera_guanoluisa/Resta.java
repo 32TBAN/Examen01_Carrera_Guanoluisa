@@ -23,16 +23,50 @@ public class Resta extends AppCompatActivity {
         resultado = findViewById(R.id.ResultadoR);
     }
 
-    public void resta(View view){
+    public void resta(View view) {
         String num1String = num1.getText().toString();
         String num2String = num2.getText().toString();
+        String resultadoResta = restaStrings(num1String, num2String);
 
-        BigInteger numero1Grande = new BigInteger(num1String);
-        BigInteger numero2Grande = new BigInteger(num2String);
+        resultado.setText(num1String + "\n-" +
+                num2String + "\n _____________________ \n" + resultadoResta);
+    }
 
-        BigInteger resultadoSuma = numero1Grande.subtract(numero2Grande);
+    private String restaStrings(String num1, String num2) {
+        int maxLength = Math.max(num1.length(), num2.length());
+        num1 = completarCeros(num1, maxLength);
+        num2 = completarCeros(num2, maxLength);
 
-        resultado.setText(num1String+"\n"+
-                num2String+"\n _____________________ \n"+ resultadoSuma.toString());
+        StringBuilder resultado = new StringBuilder();
+        int carry = 0;
+
+        for (int i = maxLength - 1; i >= 0; i--) {
+            int digito1 = Character.getNumericValue(num1.charAt(i));
+            int digito2 = Character.getNumericValue(num2.charAt(i));
+
+            int resta = digito1 - digito2 - carry;
+
+            if (resta < 0) {
+                resta += 10;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+
+            resultado.insert(0, resta);
+        }
+
+        while (resultado.length() > 1 && resultado.charAt(0) == '0') {
+            resultado.deleteCharAt(0);
+        }
+
+        return resultado.toString();
+    }
+    private String completarCeros(String numero, int longitudObjetivo) {
+
+        while (numero.length() < longitudObjetivo) {
+            numero = "0" + numero;
+        }
+        return numero;
     }
 }
